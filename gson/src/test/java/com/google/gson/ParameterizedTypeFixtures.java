@@ -118,7 +118,7 @@ public class ParameterizedTypeFixtures {
     public MyParameterizedTypeInstanceCreator(T instanceOfT) {
       this.instanceOfT = instanceOfT;
     }
-    @Override public MyParameterizedType<T> createInstance(Type type) {
+    public MyParameterizedType<T> createInstance(Type type) {
       return new MyParameterizedType<T>(instanceOfT);
     }
   }
@@ -142,7 +142,7 @@ public class ParameterizedTypeFixtures {
       return sb.toString();
     }
 
-    @Override public JsonElement serialize(MyParameterizedType<T> src, Type classOfSrc,
+    public JsonElement serialize(MyParameterizedType<T> src, Type classOfSrc,
         JsonSerializationContext context) {
       JsonObject json = new JsonObject();
       T value = src.getValue();
@@ -151,7 +151,7 @@ public class ParameterizedTypeFixtures {
     }
 
     @SuppressWarnings("unchecked")
-    @Override public MyParameterizedType<T> deserialize(JsonElement json, Type typeOfT,
+    public MyParameterizedType<T> deserialize(JsonElement json, Type typeOfT,
         JsonDeserializationContext context) throws JsonParseException {
       Type genericClass = ((ParameterizedType) typeOfT).getActualTypeArguments()[0];
       Class<?> rawType = $Gson$Types.getRawType(genericClass);

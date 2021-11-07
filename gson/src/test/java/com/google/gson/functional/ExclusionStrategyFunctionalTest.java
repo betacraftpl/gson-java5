@@ -37,10 +37,10 @@ import junit.framework.TestCase;
  */
 public class ExclusionStrategyFunctionalTest extends TestCase {
   private static final ExclusionStrategy EXCLUDE_SAMPLE_OBJECT_FOR_TEST = new ExclusionStrategy() {
-    @Override public boolean shouldSkipField(FieldAttributes f) {
+    public boolean shouldSkipField(FieldAttributes f) {
       return false;
     }
-    @Override public boolean shouldSkipClass(Class<?> clazz) {
+    public boolean shouldSkipClass(Class<?> clazz) {
       return clazz == SampleObjectForTest.class;
     }
   };
@@ -191,11 +191,11 @@ public class ExclusionStrategyFunctionalTest extends TestCase {
       this.typeToSkip = typeToSkip;
     }
 
-    @Override public boolean shouldSkipClass(Class<?> clazz) {
+    public boolean shouldSkipClass(Class<?> clazz) {
       return (clazz == typeToSkip);
     }
 
-    @Override public boolean shouldSkipField(FieldAttributes f) {
+    public boolean shouldSkipField(FieldAttributes f) {
       return f.getAnnotation(Foo.class) != null;
     }
   }

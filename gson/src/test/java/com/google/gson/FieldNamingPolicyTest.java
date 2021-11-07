@@ -72,7 +72,7 @@ public class FieldNamingPolicyTest {
 
     Field field = Dummy.class.getDeclaredField("i");
     String name = field.getName();
-    String expected = name.toUpperCase(Locale.ROOT);
+    String expected = name.toUpperCase(Locale.getDefault());
 
     Locale oldLocale = Locale.getDefault();
     // Set Turkish as Locale which has special case conversion rules
@@ -109,7 +109,7 @@ public class FieldNamingPolicyTest {
 
     Field field = Dummy.class.getDeclaredField("I");
     String name = field.getName();
-    String expected = name.toLowerCase(Locale.ROOT);
+    String expected = name.toLowerCase(Locale.getDefault());
 
     Locale oldLocale = Locale.getDefault();
     // Set Turkish as Locale which has special case conversion rules

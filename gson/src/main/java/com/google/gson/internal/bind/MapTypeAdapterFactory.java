@@ -112,7 +112,7 @@ public final class MapTypeAdapterFactory implements TypeAdapterFactory {
     this.complexMapKeySerialization = complexMapKeySerialization;
   }
 
-  @Override public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
+  public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
     Type type = typeToken.getType();
 
     Class<? super T> rawType = typeToken.getRawType();

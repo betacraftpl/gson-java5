@@ -353,7 +353,10 @@ public class JsonWriter implements Closeable, Flushable {
 
   private void push(int newTop) {
     if (stackSize == stack.length) {
-      stack = Arrays.copyOf(stack, stackSize * 2);
+        // TODO
+      int[] newStack = new int[stackSize * 2];
+      System.arraycopy(stack, 0, newStack, 0, stackSize);
+      stack = newStack;
     }
     stack[stackSize++] = newTop;
   }

@@ -25,8 +25,6 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ConcurrentNavigableMap;
-import java.util.concurrent.ConcurrentSkipListMap;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -232,8 +230,8 @@ public class MapTest extends TestCase {
   }
 
   public void testConcurrentNavigableMap() throws Exception {
-    Type typeOfMap = new TypeToken<ConcurrentNavigableMap<Integer, String>>() {}.getType();
-    ConcurrentNavigableMap<Integer, String> map = gson.fromJson("{\"123\":\"456\"}", typeOfMap);
+    Type typeOfMap = new TypeToken<LinkedHashMap<Integer, String>>() {}.getType();
+    LinkedHashMap<Integer, String> map = gson.fromJson("{\"123\":\"456\"}", typeOfMap);
     assertEquals(1, map.size());
     assertTrue(map.containsKey(123));
     assertEquals("456", map.get(123));
@@ -242,8 +240,8 @@ public class MapTest extends TestCase {
   }
 
   public void testConcurrentSkipListMap() throws Exception {
-    Type typeOfMap = new TypeToken<ConcurrentSkipListMap<Integer, String>>() {}.getType();
-    ConcurrentSkipListMap<Integer, String> map = gson.fromJson("{\"123\":\"456\"}", typeOfMap);
+    Type typeOfMap = new TypeToken<LinkedHashMap<Integer, String>>() {}.getType();
+    LinkedHashMap<Integer, String> map = gson.fromJson("{\"123\":\"456\"}", typeOfMap);
     assertEquals(1, map.size());
     assertTrue(map.containsKey(123));
     assertEquals("456", map.get(123));

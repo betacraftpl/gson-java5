@@ -119,7 +119,7 @@ public final class JsonAdapterAnnotationOnFieldsTest extends TestCase {
   }
 
   private static class GizmoPartTypeAdapterFactory implements TypeAdapterFactory {
-    @Override public <T> TypeAdapter<T> create(Gson gson, final TypeToken<T> type) {
+    public <T> TypeAdapter<T> create(Gson gson, final TypeToken<T> type) {
       return new TypeAdapter<T>() {
         @Override public void write(JsonWriter out, T value) throws IOException {
           out.value("GizmoPartTypeAdapterFactory");
@@ -261,7 +261,7 @@ public final class JsonAdapterAnnotationOnFieldsTest extends TestCase {
       }
     };
     @SuppressWarnings("unchecked")
-    @Override public <T> TypeAdapter<T> create(Gson gson, final TypeToken<T> type) {
+    public <T> TypeAdapter<T> create(Gson gson, final TypeToken<T> type) {
       Class<?> cls = type.getRawType();
       if (Long.class.isAssignableFrom(cls)) {
         return (TypeAdapter<T>) ADAPTER;
@@ -290,7 +290,7 @@ public final class JsonAdapterAnnotationOnFieldsTest extends TestCase {
   }
 
   private static class Gizmo2PartTypeAdapterFactory implements TypeAdapterFactory {
-    @Override public <T> TypeAdapter<T> create(Gson gson, final TypeToken<T> type) {
+    public <T> TypeAdapter<T> create(Gson gson, final TypeToken<T> type) {
       return new TypeAdapter<T>() {
         @Override public void write(JsonWriter out, T value) throws IOException {
           out.value("GizmoPartTypeAdapterFactory");

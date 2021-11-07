@@ -139,7 +139,6 @@ public final class TreeTypeAdapter<T> extends TypeAdapter<T> {
     }
 
     @SuppressWarnings("unchecked") // guarded by typeToken.equals() call
-    @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
       boolean matches = exactType != null
           ? exactType.equals(type) || matchRawType && exactType.getType() == type.getRawType()
@@ -152,14 +151,14 @@ public final class TreeTypeAdapter<T> extends TypeAdapter<T> {
   }
 
   private final class GsonContextImpl implements JsonSerializationContext, JsonDeserializationContext {
-    @Override public JsonElement serialize(Object src) {
+    public JsonElement serialize(Object src) {
       return gson.toJsonTree(src);
     }
-    @Override public JsonElement serialize(Object src, Type typeOfSrc) {
+    public JsonElement serialize(Object src, Type typeOfSrc) {
       return gson.toJsonTree(src, typeOfSrc);
     }
     @SuppressWarnings("unchecked")
-    @Override public <R> R deserialize(JsonElement json, Type typeOfT) throws JsonParseException {
+    public <R> R deserialize(JsonElement json, Type typeOfT) throws JsonParseException {
       return (R) gson.fromJson(json, typeOfT);
     }
   };

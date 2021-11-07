@@ -38,7 +38,7 @@ import com.google.gson.stream.JsonWriter;
 public final class ArrayTypeAdapter<E> extends TypeAdapter<Object> {
   public static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() {
     @SuppressWarnings({"unchecked", "rawtypes"})
-    @Override public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
       Type type = typeToken.getType();
       if (!(type instanceof GenericArrayType || type instanceof Class && ((Class<?>) type).isArray())) {
         return null;

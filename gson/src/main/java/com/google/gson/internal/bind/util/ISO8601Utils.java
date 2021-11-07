@@ -268,7 +268,7 @@ public class ISO8601Utils
         }
         String input = (date == null) ? null : ('"' + date + '"');
         String msg = fail.getMessage();
-        if (msg == null || msg.isEmpty()) {
+        if (msg == null || msg.equals("")) {
             msg = "("+fail.getClass().getName()+")";
         }
         ParseException ex = new ParseException("Failed to parse date [" + input + "]: " + msg, pos.getIndex());

@@ -109,7 +109,6 @@ public class ToNumberPolicyFunctionalTest extends TestCase {
 
   public void testCustomStrategiesCannotAffectConcreteDeclaredNumbers() {
     ToNumberStrategy fail = new ToNumberStrategy() {
-      @Override
       public Byte readNumber(JsonReader in) {
         throw new UnsupportedOperationException();
       }

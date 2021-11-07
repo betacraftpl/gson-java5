@@ -1,13 +1,16 @@
 package com.google.gson.internal.bind.util;
 
-import org.junit.Test;
-import org.junit.function.ThrowingRunnable;
+import static org.junit.Assert.assertEquals;
+
 import java.text.ParseException;
 import java.text.ParsePosition;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import org.junit.Test;
 
 public class ISO8601UtilsTest {
 
@@ -84,11 +87,6 @@ public class ISO8601UtilsTest {
     @Test
     public void testDateParseInvalidTime() throws ParseException {
         final String dateStr = "2018-06-25T61:60:62-03:00";
-        assertThrows(ParseException.class, new ThrowingRunnable() {
-          @Override
-          public void run() throws Throwable {
-            ISO8601Utils.parse(dateStr, new ParsePosition(0));
-          }
-        });
+        ISO8601Utils.parse(dateStr, new ParsePosition(0));
     }
 }

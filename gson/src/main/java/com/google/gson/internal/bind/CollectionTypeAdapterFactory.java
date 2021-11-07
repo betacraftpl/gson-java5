@@ -40,7 +40,6 @@ public final class CollectionTypeAdapterFactory implements TypeAdapterFactory {
     this.constructorConstructor = constructorConstructor;
   }
 
-  @Override
   public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
     Type type = typeToken.getType();
 

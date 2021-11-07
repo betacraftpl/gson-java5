@@ -37,7 +37,7 @@ public enum ToNumberPolicy implements ToNumberStrategy {
    * This is the default strategy used during deserialization of numbers as {@link Object}.
    */
   DOUBLE {
-    @Override public Double readNumber(JsonReader in) throws IOException {
+    public Double readNumber(JsonReader in) throws IOException {
       return in.nextDouble();
     }
   },
@@ -48,7 +48,7 @@ public enum ToNumberPolicy implements ToNumberStrategy {
    * {@link Number}.
    */
   LAZILY_PARSED_NUMBER {
-    @Override public Number readNumber(JsonReader in) throws IOException {
+    public Number readNumber(JsonReader in) throws IOException {
       return new LazilyParsedNumber(in.nextString());
     }
   },
@@ -63,7 +63,7 @@ public enum ToNumberPolicy implements ToNumberStrategy {
    * is thrown.
    */
   LONG_OR_DOUBLE {
-    @Override public Number readNumber(JsonReader in) throws IOException, JsonParseException {
+    public Number readNumber(JsonReader in) throws IOException, JsonParseException {
       String value = in.nextString();
       try {
         return Long.parseLong(value);
@@ -86,7 +86,7 @@ public enum ToNumberPolicy implements ToNumberStrategy {
    * using {@link BigDecimal}.
    */
   BIG_DECIMAL {
-    @Override public BigDecimal readNumber(JsonReader in) throws IOException {
+    public BigDecimal readNumber(JsonReader in) throws IOException {
       String value = in.nextString();
       try {
         return new BigDecimal(value);

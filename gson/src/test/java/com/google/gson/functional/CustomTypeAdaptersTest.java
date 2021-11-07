@@ -57,7 +57,7 @@ public class CustomTypeAdaptersTest extends TestCase {
   public void testCustomSerializers() {
     Gson gson = builder.registerTypeAdapter(
         ClassWithCustomTypeConverter.class, new JsonSerializer<ClassWithCustomTypeConverter>() {
-          @Override public JsonElement serialize(ClassWithCustomTypeConverter src, Type typeOfSrc,
+          public JsonElement serialize(ClassWithCustomTypeConverter src, Type typeOfSrc,
               JsonSerializationContext context) {
         JsonObject json = new JsonObject();
         json.addProperty("bag", 5);
@@ -72,7 +72,7 @@ public class CustomTypeAdaptersTest extends TestCase {
   public void testCustomDeserializers() {
     Gson gson = new GsonBuilder().registerTypeAdapter(
         ClassWithCustomTypeConverter.class, new JsonDeserializer<ClassWithCustomTypeConverter>() {
-          @Override public ClassWithCustomTypeConverter deserialize(JsonElement json, Type typeOfT,
+          public ClassWithCustomTypeConverter deserialize(JsonElement json, Type typeOfT,
               JsonDeserializationContext context) {
         JsonObject jsonObject = json.getAsJsonObject();
         int value = jsonObject.get("bag").getAsInt();
@@ -109,7 +109,7 @@ public class CustomTypeAdaptersTest extends TestCase {
   public void testCustomNestedSerializers() {
     Gson gson = new GsonBuilder().registerTypeAdapter(
         BagOfPrimitives.class, new JsonSerializer<BagOfPrimitives>() {
-          @Override public JsonElement serialize(BagOfPrimitives src, Type typeOfSrc,
+          public JsonElement serialize(BagOfPrimitives src, Type typeOfSrc,
           JsonSerializationContext context) {
         return new JsonPrimitive(6);
       }
@@ -121,7 +121,7 @@ public class CustomTypeAdaptersTest extends TestCase {
   public void testCustomNestedDeserializers() {
     Gson gson = new GsonBuilder().registerTypeAdapter(
         BagOfPrimitives.class, new JsonDeserializer<BagOfPrimitives>() {
-          @Override public BagOfPrimitives deserialize(JsonElement json, Type typeOfT,
+          public BagOfPrimitives deserialize(JsonElement json, Type typeOfT,
           JsonDeserializationContext context) throws JsonParseException {
         int value = json.getAsInt();
         return new BagOfPrimitives(value, value, false, "");
@@ -134,7 +134,6 @@ public class CustomTypeAdaptersTest extends TestCase {
 
   public void testCustomTypeAdapterDoesNotAppliesToSubClasses() {
     Gson gson = new GsonBuilder().registerTypeAdapter(Base.class, new JsonSerializer<Base> () {
-      @Override
       public JsonElement serialize(Base src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject json = new JsonObject();
         json.addProperty("value", src.baseValue);
@@ -151,7 +150,6 @@ public class CustomTypeAdaptersTest extends TestCase {
 
   public void testCustomTypeAdapterAppliesToSubClassesSerializedAsBaseClass() {
     Gson gson = new GsonBuilder().registerTypeAdapter(Base.class, new JsonSerializer<Base> () {
-      @Override
       public JsonElement serialize(Base src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject json = new JsonObject();
         json.addProperty("value", src.baseValue);
@@ -196,13 +194,11 @@ public class CustomTypeAdaptersTest extends TestCase {
   }
 
   public static final class FooTypeAdapter implements JsonSerializer<Foo>, JsonDeserializer<Foo> {
-    @Override
     public Foo deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
         throws JsonParseException {
       return context.deserialize(json, typeOfT);
     }
 
-    @Override
     public JsonElement serialize(Foo src, Type typeOfSrc, JsonSerializationContext context) {
       return context.serialize(src, typeOfSrc);
     }
@@ -211,7 +207,7 @@ public class CustomTypeAdaptersTest extends TestCase {
   public void testCustomSerializerInvokedForPrimitives() {
     Gson gson = new GsonBuilder()
         .registerTypeAdapter(boolean.class, new JsonSerializer<Boolean>() {
-          @Override public JsonElement serialize(Boolean s, Type t, JsonSerializationContext c) {
+          public JsonElement serialize(Boolean s, Type t, JsonSerializationContext c) {
             return new JsonPrimitive(s ? 1 : 0);
           }
         })
@@ -224,7 +220,6 @@ public class CustomTypeAdaptersTest extends TestCase {
   public void testCustomDeserializerInvokedForPrimitives() {
     Gson gson = new GsonBuilder()
         .registerTypeAdapter(boolean.class, new JsonDeserializer() {
-          @Override
           public Object deserialize(JsonElement json, Type t, JsonDeserializationContext context) {
             return json.getAsInt() != 0;
           }
@@ -236,7 +231,6 @@ public class CustomTypeAdaptersTest extends TestCase {
 
   public void testCustomByteArraySerializer() {
     Gson gson = new GsonBuilder().registerTypeAdapter(byte[].class, new JsonSerializer<byte[]>() {
-      @Override
       public JsonElement serialize(byte[] src, Type typeOfSrc, JsonSerializationContext context) {
         StringBuilder sb = new StringBuilder(src.length);
         for (byte b : src) {
@@ -253,7 +247,7 @@ public class CustomTypeAdaptersTest extends TestCase {
   public void testCustomByteArrayDeserializerAndInstanceCreator() {
     GsonBuilder gsonBuilder = new GsonBuilder().registerTypeAdapter(byte[].class,
         new JsonDeserializer<byte[]>() {
-          @Override public byte[] deserialize(JsonElement json,
+          public byte[] deserialize(JsonElement json,
               Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         String str = json.getAsString();
         byte[] data = new byte[str.length()];
@@ -290,17 +284,17 @@ public class CustomTypeAdaptersTest extends TestCase {
   private static class StringHolderTypeAdapter implements JsonSerializer<StringHolder>,
       JsonDeserializer<StringHolder>, InstanceCreator<StringHolder> {
 
-    @Override public StringHolder createInstance(Type type) {
+    public StringHolder createInstance(Type type) {
       //Fill up with objects that will be thrown away
       return new StringHolder("unknown:thing");
     }
 
-    @Override public StringHolder deserialize(JsonElement src, Type type,
+    public StringHolder deserialize(JsonElement src, Type type,
         JsonDeserializationContext context) {
       return new StringHolder(src.getAsString());
     }
 
-    @Override public JsonElement serialize(StringHolder src, Type typeOfSrc,
+    public JsonElement serialize(StringHolder src, Type typeOfSrc,
         JsonSerializationContext context) {
       String contents = src.part1 + ':' + src.part2;
       return new JsonPrimitive(contents);
@@ -429,7 +423,6 @@ public class CustomTypeAdaptersTest extends TestCase {
   }
 
   private static class DataHolderSerializer implements JsonSerializer<DataHolder> {
-    @Override
     public JsonElement serialize(DataHolder src, Type typeOfSrc, JsonSerializationContext context) {
       JsonObject obj = new JsonObject();
       obj.addProperty("myData", src.data);
@@ -438,7 +431,6 @@ public class CustomTypeAdaptersTest extends TestCase {
   }
 
   private static class DataHolderDeserializer implements JsonDeserializer<DataHolder> {
-    @Override
     public DataHolder deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
         throws JsonParseException {
       JsonObject jsonObj = json.getAsJsonObject();
@@ -451,13 +443,11 @@ public class CustomTypeAdaptersTest extends TestCase {
   }
 
   private static class DateTypeAdapter implements JsonSerializer<Date>, JsonDeserializer<Date> {
-    @Override
     public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) {
       return typeOfT == Date.class
           ? new Date(json.getAsLong())
           : new java.sql.Date(json.getAsLong());
     }
-    @Override
     public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
       return new JsonPrimitive(src.getTime());
     }

@@ -48,7 +48,7 @@ public class JsonAdapterNullSafeTest extends TestCase {
       // because we use it to return a null type adapter on a recursive call.
       private static final ThreadLocal<Boolean> recursiveCall = new ThreadLocal<Boolean>();
 
-      @Override public <T> TypeAdapter<T> create(final Gson gson, TypeToken<T> type) {
+      public <T> TypeAdapter<T> create(final Gson gson, TypeToken<T> type) {
         if (type.getRawType() != Device.class || recursiveCall.get() != null) {
           recursiveCall.set(null); // clear for subsequent use
           return null;

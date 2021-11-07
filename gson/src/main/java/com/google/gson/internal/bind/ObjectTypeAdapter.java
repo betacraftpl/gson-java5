@@ -53,7 +53,7 @@ public final class ObjectTypeAdapter extends TypeAdapter<Object> {
   private static TypeAdapterFactory newFactory(final ToNumberStrategy toNumberStrategy) {
     return new TypeAdapterFactory() {
       @SuppressWarnings("unchecked")
-      @Override public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+      public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
         if (type.getRawType() == Object.class) {
           return (TypeAdapter<T>) new ObjectTypeAdapter(gson, toNumberStrategy);
         }

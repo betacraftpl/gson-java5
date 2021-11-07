@@ -297,9 +297,17 @@ public final class JsonTreeReader extends JsonReader {
   private void push(Object newTop) {
     if (stackSize == stack.length) {
       int newLength = stackSize * 2;
-      stack = Arrays.copyOf(stack, newLength);
-      pathIndices = Arrays.copyOf(pathIndices, newLength);
-      pathNames = Arrays.copyOf(pathNames, newLength);
+      Object[] newStack = new Object[newLength];
+      System.arraycopy(stack, 0, newStack, 0, stackSize);
+      stack = newStack;
+
+      int[] newPathIndices = new int[newLength];
+      System.arraycopy(pathIndices, 0, newPathIndices, 0, stackSize);
+      pathIndices = newPathIndices;
+
+      String[] newPathNames = new String[newLength];
+      System.arraycopy(pathNames, 0, newPathNames, 0, stackSize);
+      pathNames = newPathNames;
     }
     stack[stackSize++] = newTop;
   }

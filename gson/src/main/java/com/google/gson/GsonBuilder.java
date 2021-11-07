@@ -638,7 +638,7 @@ public final class GsonBuilder {
     TypeAdapterFactory sqlTimestampAdapterFactory = null;
     TypeAdapterFactory sqlDateAdapterFactory = null;
 
-    if (datePattern != null && !datePattern.trim().isEmpty()) {
+    if (datePattern != null && !datePattern.trim().equals("")) {
       dateAdapterFactory = DefaultDateTypeAdapter.DateType.DATE.createAdapterFactory(datePattern);
 
       if (sqlTypesSupported) {

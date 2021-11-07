@@ -667,7 +667,8 @@ public class DefaultTypeAdaptersTest extends TestCase {
       try {
         return Class.forName(className);
       } catch (ClassNotFoundException e) {
-        throw new IOException(e);
+          e.printStackTrace();
+        throw new IOException();
       }
     }
   }

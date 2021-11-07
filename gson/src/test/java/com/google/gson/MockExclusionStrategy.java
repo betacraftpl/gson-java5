@@ -31,12 +31,10 @@ final class MockExclusionStrategy implements ExclusionStrategy {
     this.skipField = skipField;
   }
 
-  @Override
   public boolean shouldSkipField(FieldAttributes f) {
     return skipField;
   }
 
-  @Override
   public boolean shouldSkipClass(Class<?> clazz) {
     return skipClass;
   }

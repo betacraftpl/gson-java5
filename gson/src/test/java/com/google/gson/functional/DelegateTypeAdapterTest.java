@@ -74,7 +74,7 @@ public class DelegateTypeAdapterTest extends TestCase {
     public int numReads = 0;
     public int numWrites = 0;
 
-    @Override public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
       final TypeAdapter<T> delegate = gson.getDelegateAdapter(this, type);
       return new TypeAdapter<T>() {
         @Override

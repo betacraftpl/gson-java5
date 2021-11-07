@@ -91,7 +91,7 @@ public final class ReflectiveTypeAdapterFactory implements TypeAdapterFactory {
     return fieldNames;
   }
 
-  @Override public <T> TypeAdapter<T> create(Gson gson, final TypeToken<T> type) {
+  public <T> TypeAdapter<T> create(Gson gson, final TypeToken<T> type) {
     Class<? super T> raw = type.getRawType();
 
     if (!Object.class.isAssignableFrom(raw)) {
